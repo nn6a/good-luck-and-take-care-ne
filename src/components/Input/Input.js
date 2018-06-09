@@ -66,6 +66,7 @@ export default class Input extends Component {
 
 const Wrapper = styled.div`
     display: flex;
+    padding: 32px 8px;
 `;
 
 const StyledInput = styled(Textarea)`

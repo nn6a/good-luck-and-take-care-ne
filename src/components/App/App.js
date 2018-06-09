@@ -31,21 +31,13 @@ class App extends Component {
     render () {
         return (
             <Wrapper>
-                {!this.state.user ? (
-                    <button
-                        className="app__button"
-                        onClick={this.handleSignIn.bind(this)}
-                    >
-                        Sign in
-                    </button>
-                ) : (
-                    <button
-                        className="app__button"
-                        onClick={this.handleLogOut.bind(this)}
-                    >
-                        Logout
-                    </button>
-                )}
+                <AccountWrapper>
+                    {!this.state.user ? (
+                        <button onClick={this.handleSignIn.bind(this)}>Sign in</button>
+                    ) : (
+                        <button onClick={this.handleLogOut.bind(this)}>Logout</button>
+                    )}
+                </AccountWrapper>
 
                 <Timeline user={this.state.user}/>
                 <InputWrapper>
@@ -84,4 +76,7 @@ const InputWrapper = styled.div`
     width: 100%;
 `;
 
+const AccountWrapper = styled.div`
+    padding: 0 16px;
+`;
 export default App;

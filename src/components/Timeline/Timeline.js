@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import styled from 'styled-components';
 import Message from '../Message/Message';
 import {db} from '../../helpers/firebase';
 
@@ -27,13 +28,15 @@ export default class Timeline extends Component {
 
     render () {
         return (
-            <div className="form">
-                <div className="form__message">
-                    {this.state.list.map((item, index) =>
-                        <Message key={index} message={item}/>
-                    )}
-                </div>
-            </div>
+            <Wrapper>
+                {this.state.list.map((item, index) =>
+                    <Message key={index} message={item}/>
+                )}
+            </Wrapper>
         );
     }
 }
+
+const Wrapper = styled.div`
+    padding: 24px 16px;
+`;
