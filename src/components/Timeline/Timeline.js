@@ -38,5 +38,10 @@ export default class Timeline extends Component {
 }
 
 const Wrapper = styled.div`
-    padding: 24px 16px;
+    height: 100%;
+    padding: 0 16px;
+    overflow: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
 `;

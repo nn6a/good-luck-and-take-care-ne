@@ -49,14 +49,16 @@ class App extends Component {
 }
 
 const Wrapper = styled.div`
+    position: relative;
+    height: 100vh;
     @media(min-width: 426px){
         height: 678px;
         width: 314px;
         border: 12px solid #080808;
         border-radius: 44px;
         box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
-        position: relative;
         margin: 32px auto;
+        overflow: hidden;
         &:before {
             position: absolute;
             left: calc(50% - 28%);
@@ -77,6 +79,7 @@ const InputWrapper = styled.div`
 `;
 
 const AccountWrapper = styled.div`
+    position: absolute;
     padding: 0 16px;
 `;
 export default App;

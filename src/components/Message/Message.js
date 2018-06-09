@@ -17,6 +17,12 @@ const Wrapper = styled.div`
     padding: 12px;
     margin-bottom: 16px;
     border-radius: 8px;
+    &:first-child {
+      margin-top: 32px;
+    }
+    &:last-child {
+      margin-bottom: 104px;
+    }
 `;
 
 const Name = styled.span`
