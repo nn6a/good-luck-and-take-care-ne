@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import Form from '../Form/Form.js';
+import Timeline from '../Timeline/Timeline';
+import Input from '../Input/Input'
 import firebase from 'firebase';
 
 class App extends Component {
@@ -46,7 +47,10 @@ class App extends Component {
                     </button>
                 )}
 
-                <Form user={this.state.user}/>
+                <Timeline user={this.state.user}/>
+                <InputWrapper>
+                    <Input user={this.state.user}/>
+                </InputWrapper>
             </Wrapper>
         );
     }
@@ -72,6 +76,12 @@ const Wrapper = styled.div`
             border-radius: 0 0 15px 15px;
         }
     }
+`;
+
+const InputWrapper = styled.div`
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 `;
 
 export default App;
