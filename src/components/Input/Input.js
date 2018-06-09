@@ -42,8 +42,10 @@ export default class Input extends Component {
     }
 
     handleKeyPress (event) {
-        if (event.key !== 'Enter') return;
-        this.handleSend();
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            this.handleSend();
+        }
     }
 
 
