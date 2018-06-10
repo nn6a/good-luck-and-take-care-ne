@@ -41,14 +41,6 @@ export default class Input extends Component {
         }
     }
 
-    handleKeyPress (event) {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            this.handleSend();
-        }
-    }
-
-
     render () {
         return (
             <Wrapper>
@@ -58,7 +50,6 @@ export default class Input extends Component {
                     placeholder="Type message"
                     value={this.state.message}
                     onChange={this.handleChange.bind(this)}
-                    onKeyPress={this.handleKeyPress.bind(this)}
                 />
                 <Button onClick={this.handleSend.bind(this)}>send</Button>
             </Wrapper>
