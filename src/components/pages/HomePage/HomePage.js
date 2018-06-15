@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import Timeline from '../../Timeline/Timeline';
 import firebase from 'firebase';
 import {Link} from 'react-router-dom';
+import Timeline from '../../Timeline/Timeline';
+import Button from '../../Button/Button';
 
 class HomePage extends Component {
     constructor (props) {
@@ -40,9 +41,12 @@ class HomePage extends Component {
                 </AccountWrapper>
 
                 <Timeline user={this.state.user}/>
-                <FabWrapper to={'/compose'}>
-                    <Fab/>
-                </FabWrapper>
+
+                <ButtonWrapper>
+                    <Link to={'/compose'}>
+                        <Button>LEAVE A MESSAGE</Button>
+                    </Link>
+                </ButtonWrapper>
             </Wrapper>
         );
     }
@@ -78,17 +82,12 @@ const AccountWrapper = styled.div`
     padding: 0 16px;
 `;
 
-const FabWrapper = styled(Link)`
+const ButtonWrapper = styled.div`
+    box-sizing: border-box;
+    width: 100%;
     position: absolute;
     bottom: 32px;
-    right: 8px;
-`;
-
-const Fab = styled.div`
-    width: 64px;
-    height: 64px;
-    border-radius: 64px;
-    background-color: rgb(244, 83, 123, 1);
+    padding: 8px;
 `;
 
 export default HomePage;

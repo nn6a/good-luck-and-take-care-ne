@@ -1,28 +1,61 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import firebase from 'firebase';
-import Input from '../../Input/Input';
+import {db} from "../../../helpers/firebase";
+import Textarea from '../../Textarea/Textarea';
+import Button from '../../Button/Button';
 
 class ComposePage extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            user: null,
-        }
+            userName: '',
+            message: '',
+        };
+        this.messageRef = db.collection("messages");
     }
+
+    handleMessage = (message) => {
+        this.setState({message})
+    };
+
+    handleSend = () => {
+        if (!this.state.message) return;
+
+        const newItem = {
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            userName: this.state.userName,
+            message: this.state.message,
+        };
+        this.messageRef.add(newItem)
+            .then(() => {
+                this.setState({message: ''});
+                this.props.history.push('/');
+            })
+            .catch((error) => {
+                console.error("Error adding document: ", error);
+            });
+    };
 
     componentDidMount () {
         firebase.auth().onAuthStateChanged(user => {
-            this.setState({user});
+            this.setState({userName: user.displayName})
         });
     }
 
     render () {
         return (
             <Wrapper>
+                <p>{this.props.userName}</p>
                 <InputWrapper>
-                    <Input user={this.state.user}/>
+                    <Textarea
+                        value={this.props.message}
+                        onEditText={this.handleMessage}
+                    />
                 </InputWrapper>
+                <ButtonWrapper>
+                    <Button onButtonClick={this.handleSend}>PUSH ME</Button>
+                </ButtonWrapper>
             </Wrapper>
         );
     }
@@ -53,9 +86,13 @@ const Wrapper = styled.div`
 `;
 
 const InputWrapper = styled.div`
-    position: absolute;
-    bottom: 0;
     width: 100%;
+    box-sizing: border-box;
+    padding: 40px 16px 24px;
+`;
+
+const ButtonWrapper = styled.div`
+    padding: 0 8px;
 `;
 
 export default ComposePage;

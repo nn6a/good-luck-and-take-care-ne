@@ -9,21 +9,26 @@ export default class Timeline extends Component {
         this.state = {
             list: [],
         };
-        this.messageRef = db.collection("messages");
+        this.messageRef = db.collection('messages');
         this.listenMessages();
     }
 
     listenMessages () {
-        this.messageRef.orderBy("timestamp", "desc").onSnapshot((querySnapshot) => {
+        this.unsubscribe = this.messageRef.orderBy('timestamp', 'desc').onSnapshot((querySnapshot) => {
             let messages = [];
             querySnapshot.forEach((doc) => {
                 messages.push(doc.data());
             });
+
             this.setState({
                 list: messages
             })
         });
+    }
 
+    componentWillUnmount () {
+        // Stop listening to changes
+        this.unsubscribe();
     }
 
     render () {
