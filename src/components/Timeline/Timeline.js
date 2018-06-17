@@ -4,8 +4,8 @@ import Message from '../Message/Message';
 import {db} from '../../helpers/firebase';
 
 export default class Timeline extends Component {
-    constructor (props) {
-        super(props);
+    constructor () {
+        super();
         this.state = {
             list: [],
         };

@@ -6,8 +6,8 @@ import Timeline from '../../Timeline/Timeline';
 import Button from '../../Button/Button';
 
 class HomePage extends Component {
-    constructor (props) {
-        super(props);
+    constructor () {
+        super();
         this.state = {
             user: null,
         }

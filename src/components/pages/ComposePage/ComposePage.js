@@ -7,8 +7,8 @@ import Button from '../../Button/Button';
 import FileUploader from 'react-firebase-file-uploader';
 
 class ComposePage extends Component {
-    constructor (props) {
-        super(props);
+    constructor () {
+        super();
         this.state = {
             uid: '',
             userName: '',
