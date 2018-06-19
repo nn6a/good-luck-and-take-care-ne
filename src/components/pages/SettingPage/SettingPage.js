@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import firebase from 'firebase'
+import ApplePhoneTemplate from '../../templates/ApplePhoneTemplate'
 
 class SettingPage extends Component {
     constructor () {
@@ -25,7 +26,7 @@ class SettingPage extends Component {
 
     render () {
         return (
-            <div>
+            <ApplePhoneTemplate>
                 <h3>Setting Page</h3>
                 {this.state.user &&
                 <div>
@@ -35,7 +36,7 @@ class SettingPage extends Component {
                 </div>
                 }
                 <button onClick={this.handleLogOut}>Logout</button>
-            </div>
+            </ApplePhoneTemplate>
         );
     }
 }

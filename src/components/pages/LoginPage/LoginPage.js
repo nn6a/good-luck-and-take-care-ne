@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-// import styled from 'styled-components'
 import firebase from 'firebase'
+import ApplePhoneTemplate from '../../templates/ApplePhoneTemplate'
 
 class LoginPage extends Component {
     constructor () {
@@ -25,26 +25,19 @@ class LoginPage extends Component {
         firebase.auth().signInWithRedirect(provider);
     };
 
-    handleLogOut = () => {
-        firebase.auth().signOut();
-    };
-
     render () {
         return (
-            <div>
+            <ApplePhoneTemplate>
                 {this.state.isAuthenticated !== undefined && !this.state.isAuthenticated &&
                 <div>
-                    {!this.state.user ? (
-                        <button onClick={this.handleSignIn}>Sign in</button>
-                    ) : (
-                        <button onClick={this.handleLogOut}>Logout</button>
-                    )}
+                    <h3>Login Page</h3>
+                    <button onClick={this.handleSignIn}>Sign in</button>
                 </div>
                 }
                 {this.state.isAuthenticated === undefined &&
                 <div>Loading...</div>
                 }
-            </div>
+            </ApplePhoneTemplate>
         );
     }
 }
