@@ -98,14 +98,7 @@ export default class Message extends Component {
 const Wrapper = styled.div`
     background-color: rgba(29,38,65,0.84);
     padding: 12px;
-    margin-bottom: 16px;
-    border-radius: 8px;
-    &:first-child {
-      margin-top: 32px;
-    }
-    &:last-child {
-      margin-bottom: 104px;
-    }
+    border-radius: 0 8px 8px 8px;
 `;
 
 const Name = styled.span`
