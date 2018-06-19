@@ -1,46 +1,20 @@
-import React, {Component} from 'react';
-import styled from 'styled-components';
-import firebase from 'firebase';
-import {Link} from 'react-router-dom';
-import Timeline from '../../Timeline/Timeline';
-import Button from '../../Button/Button';
+import React, {Component} from 'react'
+import styled from 'styled-components'
+import {Link} from 'react-router-dom'
+import Timeline from '../../Timeline/Timeline'
+import Button from '../../Button/Button'
 
 class HomePage extends Component {
-    constructor () {
-        super();
-        this.state = {
-            user: null,
-        }
-    }
-
-    componentDidMount () {
-        firebase.auth().onAuthStateChanged(user => {
-            this.setState({user});
-        });
-    }
-
-    handleSignIn () {
-        // const provider = new auth.GoogleAuthProvider();
-        const provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(provider);
-    }
-
-    handleLogOut () {
-        firebase.auth().signOut();
-    }
-
     render () {
         return (
             <Wrapper>
-                <AccountWrapper>
-                    {!this.state.user ? (
-                        <button onClick={this.handleSignIn.bind(this)}>Sign in</button>
-                    ) : (
-                        <button onClick={this.handleLogOut.bind(this)}>Logout</button>
-                    )}
-                </AccountWrapper>
+                <SettingWrapper>
+                    <Link to={'/setting'}>
+                        <button>Setting</button>
+                    </Link>
+                </SettingWrapper>
 
-                <Timeline user={this.state.user}/>
+                <Timeline/>
 
                 <ButtonWrapper>
                     <Link to={'/compose'}>
@@ -76,9 +50,9 @@ const Wrapper = styled.div`
     }
 `;
 
-
-const AccountWrapper = styled.div`
+const SettingWrapper = styled.div`
     position: absolute;
+    right: 0;
     padding: 0 16px;
 `;
 

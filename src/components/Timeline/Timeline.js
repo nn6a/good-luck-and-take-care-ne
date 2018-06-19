@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import styled from 'styled-components';
-import Message from '../Message/Message';
-import {db} from '../../helpers/firebase';
+import React, {Component} from 'react'
+import styled from 'styled-components'
+import Message from '../Message/Message'
+import {db} from '../../helpers/firebase'
 
 export default class Timeline extends Component {
     constructor () {

@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import styled from 'styled-components';
-import Lightbox from 'react-images';
+import React, {Component} from 'react'
+import styled from 'styled-components'
+import Lightbox from 'react-images'
 
 export default class Message extends Component {
     constructor () {

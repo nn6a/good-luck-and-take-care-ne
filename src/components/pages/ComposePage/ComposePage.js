@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import styled from 'styled-components';
-import firebase from 'firebase';
-import {db} from "../../../helpers/firebase";
-import Textarea from '../../Textarea/Textarea';
-import Button from '../../Button/Button';
-import FileUploader from 'react-firebase-file-uploader';
+import React, {Component} from 'react'
+import styled from 'styled-components'
+import firebase from 'firebase'
+import {db} from "../../../helpers/firebase"
+import Textarea from '../../Textarea/Textarea'
+import Button from '../../Button/Button'
+import FileUploader from 'react-firebase-file-uploader'
 
 class ComposePage extends Component {
     constructor () {
@@ -82,10 +82,12 @@ class ComposePage extends Component {
 
     componentDidMount () {
         firebase.auth().onAuthStateChanged(user => {
-            this.setState({
-                userName: user.displayName,
-                uid: user.uid
-            })
+            if (user) {
+                this.setState({
+                    userName: user.displayName,
+                    uid: user.uid
+                })
+            }
         });
     }
 
