@@ -64,9 +64,9 @@ const MessageWrapper = styled.div`
       margin-bottom: 104px;
     }
     > :not(:first-child) {
-    flex-grow: 1;
-    margin-left: 4px;
-  }
+      flex-grow: 1;
+      margin-left: 4px;
+    }
 `;
 
 const Avatar = styled.img`
