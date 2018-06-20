@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import styled from 'styled-components'
 import firebase from 'firebase'
-import {db} from "../../../helpers/firebase"
+import {db} from '../../../helpers/firebase'
+import {Link} from 'react-router-dom'
 import ApplePhoneTemplate from '../../templates/ApplePhoneTemplate'
 import Textarea from '../../Textarea/Textarea'
 import Button from '../../Button/Button'
@@ -13,6 +14,7 @@ class ComposePage extends Component {
         this.state = {
             uid: '',
             userName: '',
+            avatar: '',
             message: '',
             isUploading: false,
             progress: 0,
@@ -68,8 +70,9 @@ class ComposePage extends Component {
         const newItem = {
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             userName: this.state.userName,
+            avatar: this.state.avatar,
             message: this.state.message,
-            imageURL: this.state.imageURL
+            imageURL: this.state.imageURL,
         };
         this.messageRef.add(newItem)
             .then(() => {
@@ -86,7 +89,8 @@ class ComposePage extends Component {
             if (user) {
                 this.setState({
                     userName: user.displayName,
-                    uid: user.uid
+                    uid: user.uid,
+                    avatar: user.photoURL
                 })
             }
         });
@@ -108,6 +112,12 @@ class ComposePage extends Component {
         return (
             <ApplePhoneTemplate>
                 <InputWrapper>
+                    {this.state.avatar &&
+                    <Link to={'/avatar'}>
+                        <Avatar src={this.state.avatar}/>
+                    </Link>
+                    }
+
                     <Textarea
                         value={this.props.message}
                         onEditText={this.handleMessage}
@@ -121,7 +131,7 @@ class ComposePage extends Component {
 
                     {!this.state.isUploading && this.state.imageURL.length < 4 &&
                     <StyledLabel>
-                        ADD
+                        ADD IMAGE
                         <FileUploader
                             hidden
                             accept="image/*"
@@ -152,6 +162,11 @@ const InputWrapper = styled.div`
     width: 100%;
     box-sizing: border-box;
     padding: 40px 16px 24px;
+`;
+
+const Avatar = styled.img`
+    width: 80px;
+    height: 80px;
 `;
 
 const ButtonWrapper = styled.div`

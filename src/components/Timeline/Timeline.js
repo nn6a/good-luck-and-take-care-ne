@@ -36,7 +36,6 @@ export default class Timeline extends Component {
             <Wrapper>
                 {this.state.list.map((item, index) =>
                     <MessageWrapper key={index}>
-                        <Avatar src={'https://randomuser.me/api/portraits/men/81.jpg'}/>
                         <Message message={item}/>
                     </MessageWrapper>
                 )}
@@ -56,21 +55,16 @@ const Wrapper = styled.div`
 
 const MessageWrapper = styled.div`
     display: flex;
-    margin-bottom: 16px;
+    margin-bottom: 32px;
     &:first-child {
       margin-top: 32px;
     }
     &:last-child {
       margin-bottom: 104px;
     }
-    > :not(:first-child) {
-      flex-grow: 1;
-      margin-left: 4px;
-    }
+    //> :not(:first-child) {
+    //  flex-grow: 1;
+    //  margin-left: 4px;
+    //}
 `;
 
-const Avatar = styled.img`
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-`;

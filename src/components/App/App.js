@@ -7,6 +7,7 @@ import HomePage from '../pages/HomePage/HomePage'
 import ComposePage from '../pages/ComposePage/ComposePage'
 import LoginPage from '../pages/LoginPage/LoginPage'
 import SettingPage from '../pages/SettingPage/SettingPage'
+import SelectAvatarPage from '../pages/SelectAvatarPage/SelectAvatarPage'
 
 injectGlobal`
   body {
@@ -66,6 +67,7 @@ class App extends Component {
                 <PublicRoute isAuthenticated={this.state.isAuthenticated} path="/login" component={LoginPage}/>
                 <PrivateRoute isAuthenticated={this.state.isAuthenticated} path="/setting" component={SettingPage}/>
                 <PrivateRoute isAuthenticated={this.state.isAuthenticated} path="/compose" component={ComposePage}/>
+                <PrivateRoute isAuthenticated={this.state.isAuthenticated} path="/avatar" component={SelectAvatarPage}/>
                 <Route component={HomePage}/>
             </Switch>
         )
