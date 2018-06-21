@@ -25,6 +25,10 @@ class ComposePage extends Component {
         this.storageRef = firebase.storage().ref('user-images');
     }
 
+    handleChangeName = (event) => {
+        this.setState({userName: event.target.value});
+    };
+
     handleMessage = (message) => {
         this.setState({message})
     };
@@ -96,6 +100,19 @@ class ComposePage extends Component {
         });
     }
 
+    componentWillUnmount () {
+        const user = firebase.auth().currentUser;
+
+        if (user.displayName !== this.state.userName) {
+            user.updateProfile({
+                displayName: this.state.userName
+            }).then(function() {
+            }).catch(function(error) {
+                console.log(error)
+            });
+        }
+    }
+
     renderImage = (url, index) => {
         return (
             <StyledImage
@@ -117,6 +134,11 @@ class ComposePage extends Component {
                         <Avatar src={this.state.avatar}/>
                     </Link>
                     }
+
+                    <label>
+                        Name:
+                        <input type="text" value={this.state.userName} onChange={this.handleChangeName} />
+                    </label>
 
                     <Textarea
                         value={this.props.message}
