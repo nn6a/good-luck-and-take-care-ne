@@ -41,4 +41,4 @@ const ButtonWrapper = styled.div`
     padding: 8px;
 `;
 
-export default HomePage;
+export default HomePage

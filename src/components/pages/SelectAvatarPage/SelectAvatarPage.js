@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import firebase from 'firebase'
 import {db} from '../../../helpers/firebase'
 import styled from 'styled-components'
+import {Link} from 'react-router-dom'
 import ApplePhoneTemplate from '../../templates/ApplePhoneTemplate'
 
 class SelectAvatarPage extends Component {
@@ -9,8 +10,9 @@ class SelectAvatarPage extends Component {
         super();
         this.state = {
             selectedAvatarURL: '',
+            providerAvatarURL: '',
             publicAvatarURL: [],
-            providerAvatarURL: ''
+            uploadedAvatarURL: []
         };
     }
 
@@ -38,8 +40,19 @@ class SelectAvatarPage extends Component {
             } else {
                 console.log("No such document!");
             }
-        }).catch(function(error) {
+        }).catch(function (error) {
             console.log("Error getting document:", error);
+        });
+    };
+
+    handleUploadedAvatar = () => {
+        const user = firebase.auth().currentUser;
+        const avatarRef = db.collection('avatars').doc(user.uid).collection('images');
+
+        avatarRef.get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                this.setState({uploadedAvatarURL: [...this.state.uploadedAvatarURL, doc.data().imageURL]})
+            });
         });
     };
 
@@ -56,7 +69,7 @@ class SelectAvatarPage extends Component {
     };
 
     onAvatarClick = (index) => {
-        const avatarURL = [this.state.providerAvatarURL, ...this.state.publicAvatarURL];
+        const avatarURL = [this.state.providerAvatarURL, ...this.state.publicAvatarURL, ...this.state.uploadedAvatarURL];
 
         this.setState({selectedAvatarURL: avatarURL[index]})
     };
@@ -64,10 +77,11 @@ class SelectAvatarPage extends Component {
     componentDidMount () {
         this.handleUserAvatar();
         this.handlePublicAvatar();
+        this.handleUploadedAvatar();
     }
 
     renderAvatar = () => {
-        const avatarURL = [this.state.providerAvatarURL, ...this.state.publicAvatarURL];
+        const avatarURL = [this.state.providerAvatarURL, ...this.state.publicAvatarURL, ...this.state.uploadedAvatarURL];
 
         return avatarURL.map((obj, i) => {
             return (
@@ -86,6 +100,10 @@ class SelectAvatarPage extends Component {
             <ApplePhoneTemplate>
                 <h3>Select Avatar</h3>
                 <SelectedAvatar src={this.state.selectedAvatarURL} alt='avatar'/>
+
+                <Link to={'/avatar-upload'}>
+                    <button>Upload</button>
+                </Link>
 
                 {this.state.publicAvatarURL.length > 0 && this.state.providerAvatarURL &&
                 <div>
