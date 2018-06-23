@@ -123,8 +123,12 @@ const MessageWrapper = styled.div`
 
 const Name = styled.span`
     display: block;
-    font-size: 0.6rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    font-feature-settings : 'palt';
     color: rgb(244, 83, 123, 1);
+    word-break: break-word;
+    margin-bottom: 8px;
 `;
 
 const StyledMessage = styled.span`
