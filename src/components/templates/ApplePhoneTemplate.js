@@ -12,7 +12,8 @@ const ApplePhoneTemplate = ({children}) => {
 const Wrapper = styled.div`
     position: relative;
     height: 100vh;
-    @media(min-width: 426px){
+    background-color: ${props => props.theme.greyLight};
+    @media(min-width: 500px){
         height: 678px;
         width: 314px;
         border: 12px solid #080808;

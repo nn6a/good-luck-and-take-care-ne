@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import firebase from 'firebase'
 import {db} from '../../../helpers/firebase'
 import ReactCrop, {makeAspectCrop} from 'react-image-crop'
-import 'react-image-crop/dist/ReactCrop.css'
+// import 'react-image-crop/dist/ReactCrop.css'
 import ApplePhoneTemplate from '../../templates/ApplePhoneTemplate'
 
 class AvatarUploadPage extends Component {

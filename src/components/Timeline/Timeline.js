@@ -57,7 +57,7 @@ const MessageWrapper = styled.div`
     display: flex;
     margin-bottom: 32px;
     &:first-child {
-      margin-top: 32px;
+      margin-top: 64px;
     }
     &:last-child {
       margin-bottom: 104px;

@@ -71,34 +71,54 @@ export default class Message extends Component {
 
         return (
             <Wrapper>
-                <Name>{this.props.message.userName}</Name>
-                <StyledMessage>{this.props.message.message}</StyledMessage>
-
-                {imageURL.length > 0 &&
                 <div>
-                    {this.renderImage(imageURL)}
-                    <Lightbox
-                        currentImage={this.state.currentImage}
-                        images={imageURL}
-                        isOpen={this.state.lightboxIsOpen}
-                        onClickNext={this.gotoNext}
-                        onClickPrev={this.gotoPrevious}
-                        onClickThumbnail={this.gotoImage}
-                        onClose={this.closeLightbox}
-                        showImageCount={false}
-                        backdropClosesModal={true}
-                    />
+                    <Avatar src={this.props.message.avatar}/>
                 </div>
-                }
+                <MessageWrapper>
+                    <Name>{this.props.message.userName}</Name>
+                    <StyledMessage>{this.props.message.message}</StyledMessage>
+
+                    {imageURL.length > 0 &&
+                    <div>
+                        {this.renderImage(imageURL)}
+                        <Lightbox
+                            currentImage={this.state.currentImage}
+                            images={imageURL}
+                            isOpen={this.state.lightboxIsOpen}
+                            onClickNext={this.gotoNext}
+                            onClickPrev={this.gotoPrevious}
+                            onClickThumbnail={this.gotoImage}
+                            onClose={this.closeLightbox}
+                            showImageCount={false}
+                            backdropClosesModal={true}
+                        />
+                    </div>
+                    }
+                </MessageWrapper>
             </Wrapper>
         )
     }
 }
 
 const Wrapper = styled.div`
-    background-color: rgba(29,38,65,0.84);
-    padding: 12px;
-    border-radius: 0 8px 8px 8px;
+    display: flex;
+    width: 100%;
+`;
+
+const Avatar = styled.img`
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+`;
+
+const MessageWrapper = styled.div`
+    flex-grow: 1;
+    background-color: ${props => props.theme.light};
+    padding: 16px;
+    margin-top: 5px;
+    box-shadow: rgba(0, 0, 0, 0.04) 0 2px 6px;
+    border-radius: 0 16px 16px 16px;
 `;
 
 const Name = styled.span`
@@ -108,7 +128,11 @@ const Name = styled.span`
 `;
 
 const StyledMessage = styled.span`
-    color: rgba(255, 255, 255, 0.84);
+    max-width: 100%;
+    font-feature-settings : 'palt';
+    letter-spacing: 0.05em;
+    word-break: break-word;
+    color: ${props => props.theme.dark};
 `;
 
 const ImageWrapper = styled.div`

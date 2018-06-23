@@ -21,9 +21,11 @@ const StyledButton = styled.button`
     padding: 16px;
     appearance: none;
     font-size: 1rem;
-    color: #fff;
-    background-color: rgb(244, 83, 123, 1);
+    color: ${props => props.theme.light};
+    background-color: ${props => props.theme.dark};
     border-radius: 8px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.04) 0 2px 6px;
     &:focus {
       outline: none;
     }

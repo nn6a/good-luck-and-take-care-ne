@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import ApplePhoneTemplate from '../../templates/ApplePhoneTemplate'
 import Timeline from '../../Timeline/Timeline'
 import Button from '../../Button/Button'
+import setting from '../../../assets/cog.svg'
 
 class HomePage extends Component {
     render () {
@@ -11,7 +12,7 @@ class HomePage extends Component {
             <ApplePhoneTemplate>
                 <SettingWrapper>
                     <Link to={'/setting'}>
-                        <button>Setting</button>
+                        <SettingIcon src={setting} alt='setting'/>
                     </Link>
                 </SettingWrapper>
 
@@ -30,7 +31,13 @@ class HomePage extends Component {
 const SettingWrapper = styled.div`
     position: absolute;
     right: 0;
-    padding: 0 16px;
+    padding:16px 8px;
+`;
+
+const SettingIcon = styled.img`
+    width: 24px;
+    height: 24px;
+    fill: ${props => props.theme.greyDark};
 `;
 
 const ButtonWrapper = styled.div`

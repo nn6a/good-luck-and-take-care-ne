@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Switch, Route, Redirect} from 'react-router-dom'
-import {injectGlobal} from 'styled-components'
+import {injectGlobal, ThemeProvider} from 'styled-components'
 import firebase from 'firebase'
 
 import HomePage from '../pages/HomePage/HomePage'
@@ -18,20 +18,20 @@ injectGlobal`
 `;
 
 const PublicRoute = ({component: Component, isAuthenticated, ...rest}) => (
-        <Route
-            {...rest}
-            render={(props) => isAuthenticated === false
-                ? <Component {...props} />
-                : <Redirect to='/' />}
-        />
+    <Route
+        {...rest}
+        render={(props) => isAuthenticated === false
+            ? <Component {...props} />
+            : <Redirect to='/'/>}
+    />
 );
 
 const PrivateRoute = ({component: Component, isAuthenticated, ...rest}) => (
     <Route
         {...rest}
         render={(props) => isAuthenticated
-                ? <Component {...props} />
-                : <Redirect to={{pathname: '/login', state: {from: props.location}}}/>
+            ? <Component {...props} />
+            : <Redirect to={{pathname: '/login', state: {from: props.location}}}/>
         }
     />
 );
@@ -57,23 +57,34 @@ class App extends Component {
             }
         })
     }
+
     componentWillUnmount () {
         this.removeListener()
     }
 
-    render() {
+    render () {
         return (
-            <Switch>
-                <Route path="/" component={HomePage} exact/>
-                <PublicRoute isAuthenticated={this.state.isAuthenticated} path="/login" component={LoginPage}/>
-                <PrivateRoute isAuthenticated={this.state.isAuthenticated} path="/setting" component={SettingPage}/>
-                <PrivateRoute isAuthenticated={this.state.isAuthenticated} path="/compose" component={ComposePage}/>
-                <PrivateRoute isAuthenticated={this.state.isAuthenticated} path="/avatar" component={SelectAvatarPage}/>
-                <PrivateRoute isAuthenticated={this.state.isAuthenticated} path="/avatar-upload" component={AvatarUploadPage}/>
-                <Route component={HomePage}/>
-            </Switch>
+            <ThemeProvider theme={theme}>
+                <Switch>
+                    <Route path="/" component={HomePage} exact/>
+                    <PublicRoute isAuthenticated={this.state.isAuthenticated} path="/login" component={LoginPage}/>
+                    <PrivateRoute isAuthenticated={this.state.isAuthenticated} path="/setting" component={SettingPage}/>
+                    <PrivateRoute isAuthenticated={this.state.isAuthenticated} path="/compose" component={ComposePage}/>
+                    <PrivateRoute isAuthenticated={this.state.isAuthenticated} path="/avatar" component={SelectAvatarPage}/>
+                    <PrivateRoute isAuthenticated={this.state.isAuthenticated} path="/avatar-upload" component={AvatarUploadPage}/>
+                    <Route component={HomePage}/>
+                </Switch>
+            </ThemeProvider>
         )
     }
 }
+
+const theme = {
+    light: '#ffffff',
+    dark: '#373E46',
+    grey: '#C1D1E0',
+    greyDark: '#798896',
+    greyLight: '#F5F8FA'
+};
 
 export default App
