@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
+import styled from 'styled-components'
 import firebase from 'firebase'
 import ApplePhoneTemplate from '../../templates/ApplePhoneTemplate'
+import Spinner from '../../Spinner/Spinner'
 
 class LoginPage extends Component {
     constructor () {
@@ -35,11 +37,20 @@ class LoginPage extends Component {
                 </div>
                 }
                 {this.state.isAuthenticated === undefined &&
-                <div>Loading...</div>
+                <SpinnerWrapper>
+                    <Spinner/>
+                </SpinnerWrapper>
                 }
             </ApplePhoneTemplate>
         );
     }
 }
+
+const SpinnerWrapper = styled.div`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+`;
 
 export default LoginPage;
